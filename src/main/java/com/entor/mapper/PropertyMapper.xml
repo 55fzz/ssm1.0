@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Property">
+
+	<resultMap type="Property" id="PropertyMap">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<association property="category" javaType="Category">
+			<id property="id" column="cid"/>
+			<result property="name" column="cname"/>
+		</association>
+	</resultMap>
+	
+	<select id="queryById" resultMap="PropertyMap">
+		select p.id as id,p.name as name,c.id as cid,c.name as cname from Property as p,Category as c where c.id=p.cid and p.id=#{id}
+	</select>
+	
+	<select id="queryByPage" resultMap="PropertyMap" parameterType="Map">
+		select p.id as id,p.name as name,c.id as cid,c.name as cname from Property as p,Category as c where c.id=p.cid and c.id=#{id} limit #{sp.start},#{sp.pageSize}
+	</select>
+	
+	<update id="update" parameterType="Property">
+		update property set name=#{name} where id = #{id}
+	</update>
+	
+	<insert id="add" parameterType="Property">
+		insert into property(cid,name) values (#{category.id},#{name})
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+			select LAST_INSERT_ID() as id
+		</selectKey>
+	</insert>	
+	
+	<delete id="deleteById" parameterType="int">
+		delete from property where id = #{id}
+	</delete>	
+	<select id="getTotals" resultType="int">
+		select count(*) from property where cid=#{cid}
+	</select>
+</mapper>

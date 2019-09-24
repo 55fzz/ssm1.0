@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Product">
+	
+	<resultMap type="Product" id="ProductMap">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="subTitle" column="subTitle"/>
+		<result property="orignalPrice" column="orignalPrice"/>
+		<result property="promotePrice" column="promotePrice"/>
+		<result property="stock" column="stock"/>
+		<result property="createTime" column="createTime"/>
+		<association property="category" javaType="Category">
+			<id property="id" column="cid"/>
+			<result property="name" column="cname"/>
+		</association>
+	</resultMap>
+	
+	
+
+</mapper>
