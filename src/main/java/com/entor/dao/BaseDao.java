@@ -11,7 +11,7 @@ public interface BaseDao<T> {
 	
 	public T queryById(Class<?> cls,Serializable id);
 	
-	public List<T> queryByPage(Class<?> cls,SP sp);
+	public List<T> queryByPage(Class<?> cls,SP s);
 	
 	public void add(T t);
 	
@@ -21,4 +21,6 @@ public interface BaseDao<T> {
 	
 	public int getTotals(Class<?> cls);
 	
+	
+	public List<T> queryAll(Class<?> cls);
 }

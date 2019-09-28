@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Review">
+	<resultMap type="Review" id="ReviewMap">
+		<id property="id" column="id"/>
+		<result property="content" column="content"/>
+		<result property="createTime" column="createDate"/>
+		<association property="user" javaType="User">
+			<id property="id" column="uid"/>
+			<result property="name" column="uname"/>
+			<result property="password" column="password"/>
+		</association>
+		<association property="product" javaType="Product">
+			<id property="id" column="pid"/>
+			<result property="name" column="pname"/>
+			<result property="subTitle" column="subTitle"/>
+			<result property="orignalPrice" column="orignalPrice"/>
+			<result property="promotePrice" column="promotePrice"/>
+			<result property="stock" column="stock"/>
+			<result property="createTime" column="pcreateTime"/>
+		</association>
+	</resultMap>
+	
+	<select id="getReviewCount" resultType="int" parameterType="int">
+		select count(*) from review where pid=#{pid}
+	</select>
+	
+	<select id="queryByPid" resultMap="ReviewMap" parameterType="int">
+		select r.*,u.id as uid,u.name as uname,u.password as upassword from review as r ,user as u where r.pid=#{pid} and r.uid=u.id
+	</select>
+</mapper>

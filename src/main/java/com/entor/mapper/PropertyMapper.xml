@@ -20,6 +20,9 @@
 		select p.id as id,p.name as name,c.id as cid,c.name as cname from Property as p,Category as c where c.id=p.cid and c.id=#{id} limit #{sp.start},#{sp.pageSize}
 	</select>
 	
+	<select id="queryByCid" resultType="Property">
+		select * from Property where cid=#{cid}
+	</select>
 	<update id="update" parameterType="Property">
 		update property set name=#{name} where id = #{id}
 	</update>

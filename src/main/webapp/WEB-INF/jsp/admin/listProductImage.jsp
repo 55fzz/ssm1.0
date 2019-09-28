@@ -32,8 +32,8 @@
 
 <div class="workingArea">
 	<ol class="breadcrumb">
-		<li><a href="admin_category_list">所有分类</a></li>
-		<li><a href="admin_product_list?cid=${p.category.id}">${p.category.name}</a></li>
+		<li><a href="${pageContext.request.contextPath}/admin_category_list/1">所有分类</a></li>
+		<li><a href="${pageContext.request.contextPath}/admin_product_list/${p.category.id}/1">${p.category.name}</a></li>
 		<li class="active">${p.name}</li>
 		<li class="active">产品图片管理</li>
 	</ol>
@@ -45,7 +45,7 @@
 					<div class="panel panel-warning addPictureDiv">
 						<div class="panel-heading">新增产品<b class="text-primary"> 单个 </b>图片</div>
 						<div class="panel-body">
-							<form method="post" class="addFormSingle" action="admin_productImage_add" enctype="multipart/form-data">
+							<form method="post" class="addFormSingle" action="${pageContext.request.contextPath}/admin_productImage_add" enctype="multipart/form-data">
 								<table class="addTable">
 									<tr>
 										<td>请选择本地图片 尺寸400X400 为佳</td>
@@ -75,14 +75,14 @@
 						</tr>
 						</thead>
 						<tbody>
-						<c:forEach items="${pisSingle}" var="pi">
+						<c:forEach items="${p.productSingleImages}" var="ps">
 							<tr>
-								<td>${pi.id}</td>
+								<td>${ps.id}</td>
 								<td>
-									<a title="点击查看原图" href="img/productSingle/${pi.id}.jpg"><img height="50px" src="img/productSingle/${pi.id}.jpg"></a>
+									<a title="点击查看原图" href="${pageContext.request.contextPath}/img/productSingle/${ps.id}.jpg"><img height="50px" src="${pageContext.request.contextPath}/img/productSingle/${ps.id}.jpg"></a>
 								</td>
 								<td><a deleteLink="true"
-									   href="admin_productImage_delete?id=${pi.id}"><span
+									   href="${pageContext.request.contextPath}/admin_productImage_delete?id=${ps.id}"><span
 										class=" 	glyphicon glyphicon-trash"></span></a></td>
 
 							</tr>
@@ -98,7 +98,7 @@
 					<div class="panel panel-warning addPictureDiv">
 						<div class="panel-heading">新增产品<b class="text-primary"> 详情 </b>图片</div>
 						<div class="panel-body">
-							<form method="post" class="addFormDetail" action="admin_productImage_add" enctype="multipart/form-data">
+							<form method="post" class="addFormDetail" action="${pageContext.request.contextPath}/admin_productImage_add" enctype="multipart/form-data">
 								<table class="addTable">
 									<tr>
 										<td>请选择本地图片 宽度790  为佳</td>
@@ -128,14 +128,14 @@
 						</tr>
 						</thead>
 						<tbody>
-						<c:forEach items="${pisDetail}" var="pi">
+						<c:forEach items="${p.productDetailImages}" var="pd">
 							<tr>
-								<td>${pi.id}</td>
+								<td>${pd.id}</td>
 								<td>
-									<a title="点击查看原图" href="img/productDetail/${pi.id}.jpg"><img height="50px" src="img/productDetail/${pi.id}.jpg"></a>
+									<a title="点击查看原图" href="${pageContext.request.contextPath}/img/productDetail/${pd.id}.jpg"><img height="50px" src="${pageContext.request.contextPath}/img/productDetail/${pd.id}.jpg"></a>
 								</td>
 								<td><a deleteLink="true"
-									   href="admin_productImage_delete?id=${pi.id}"><span
+									   href="${pageContext.request.contextPath}/admin_productImage_delete?id=${pd.id}"><span
 										class=" 	glyphicon glyphicon-trash"></span></a></td>
 
 							</tr>

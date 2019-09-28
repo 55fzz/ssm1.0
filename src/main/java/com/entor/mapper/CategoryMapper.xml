@@ -2,10 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Category">
+
+	<resultMap type="Category" id="CategoryMap">
+		<id property="id" column="id"></id>
+		<result property="name" column="name"/>
+	</resultMap>
+
+
 	<select id="queryById" resultType="Category">
 		select * from category where id=#{ id }
 	</select>
-	
+	<select id="queryAll" resultType="Category">
+		select  * from category 
+	</select>
 	<select id="queryByPage" parameterType="SP" resultType="Category">
 		select * from category limit #{start},#{pageSize}
 	</select>

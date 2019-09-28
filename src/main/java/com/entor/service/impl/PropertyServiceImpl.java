@@ -31,4 +31,10 @@ public class PropertyServiceImpl extends BaseServiceImpl<Property> implements Pr
 		return propertyDao.getTotals(cls, cid);
 	}
 
+	@Override
+	public List<Property> queryByCid(Class<?> cls, int cid) {
+		// TODO Auto-generated method stub
+		return propertyDao.queryByCid(cls, cid);
+	}
+
 }

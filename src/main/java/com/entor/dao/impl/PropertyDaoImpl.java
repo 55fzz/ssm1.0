@@ -25,6 +25,12 @@ public class PropertyDaoImpl extends BaseDaoImpl<Property> implements PropertyDa
 		return getSqlSession().selectOne(cls.getSimpleName()+".getTotals",cid);
 	}
 
+	@Override
+	public List<Property> queryByCid(Class<?> cls, int cid) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList(cls.getSimpleName()+".queryByCid", cid);
+	}
+
 	
 	
 }

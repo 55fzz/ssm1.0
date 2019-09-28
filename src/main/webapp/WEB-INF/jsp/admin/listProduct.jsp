@@ -16,7 +16,7 @@
                 return false;
          	if (!checkEmpty("subTitle", "小标题"))
               	return false;
-            if (!checkNumber("originalPrice", "原价格"))
+            if (!checkNumber("orignalPrice", "原价格"))
                 return false;
             if (!checkNumber("promotePrice", "优惠价格"))
                 return false;
@@ -32,8 +32,8 @@
 <div class="workingArea">
 
 	<ol class="breadcrumb">
-		<li><a href="admin_category_list">所有分类</a></li>
-		<li><a href="admin_product_list?cid=${c.id}">${c.name}</a></li>
+		<li><a href="${pageContext.request.contextPath}/admin_category_list/1">所有分类</a></li>
+		<li><a href="${pageContext.request.contextPath}/admin_product_list/${c.id}/1">${c.name}</a></li>
 		<li class="active">产品管理</li>
 	</ol>
 
@@ -60,26 +60,22 @@
 				<tr>
 					<td>${p.id}</td>
 					<td>
-
-						<c:if test="${!empty p.firstProductImage}">
-							<img width="40px" src="img/productSingle/${p.firstProductImage.id}.jpg">
-						</c:if>
-
+							<img width="40px" src="${pageContext.request.contextPath}/img/productSingle/${p.firstProductImage.id}.jpg">
 					</td>
 					<td>${p.name}</td>
 					<td>${p.subTitle}</td>
-					<td>${p.originalPrice}</td>
+					<td>${p.orignalPrice}</td>
 					<td>${p.promotePrice}</td>
 					<td>${p.stock}</td>
-					<td><a href="admin_productImage_list?pid=${p.id}"><span
+					<td><a href="${pageContext.request.contextPath}/admin_productImage_list/${p.id}"><span
 							class="glyphicon glyphicon-picture"></span></a></td>
-					<td><a href="admin_propertyValue_edit?pid=${p.id}"><span
+					<td><a href="${pageContext.request.contextPath}/admin_propertyValue_edit?pid=${p.id}"><span
 							class="glyphicon glyphicon-th-list"></span></a></td>
 
-					<td><a href="admin_product_edit?id=${p.id}"><span
+					<td><a href="${pageContext.request.contextPath}/admin_product_edit?id=${p.id}&cid=${c.id}"><span
 							class="glyphicon glyphicon-edit"></span></a></td>
 					<td><a deleteLink="true"
-						   href="admin_product_delete?id=${p.id}"><span
+						   href="${pageContext.request.contextPath}/admin_product_delete?id=${p.id}"><span
 							class="     glyphicon glyphicon-trash"></span></a></td>
 
 				</tr>
@@ -95,7 +91,7 @@
 	<div class="panel panel-warning addDiv">
 		<div class="panel-heading">新增产品</div>
 		<div class="panel-body">
-			<form method="post" id="addForm" action="admin_product_add">
+			<form method="post" id="addForm" action="${pageContext.request.contextPath}/admin_product_add">
 				<table class="addTable">
 					<tr>
 						<td>产品名称</td>
@@ -109,7 +105,7 @@
 					</tr>
 					<tr>
 						<td>原价格</td>
-						<td><input id="originalPrice" value="99.98" name="originalPrice" type="text"
+						<td><input id="orignalPrice" value="99.98" name="orignalPrice" type="text"
 								   class="form-control"></td>
 					</tr>
 					<tr>

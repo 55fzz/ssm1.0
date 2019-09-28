@@ -9,9 +9,9 @@
 <script>
     $(function(){
 
-        <c:if test="${!empty msg}">
-        $("span.errorMessage").html("${msg}");
-        $("div.registerErrorMessageDiv").css("visibility","visible");
+    	 <c:if test="${!empty msg}">
+       		 	$("span.errorMessage").html("${msg}");
+        		$("div.registerErrorMessageDiv").css("visibility","visible");
         </c:if>
 
         $(".registerForm").submit(function(){
@@ -43,7 +43,7 @@
 
 
 
-<form method="post" action="foreregister" class="registerForm">
+<form method="post" action="${pageContext.request.contextPath}/foreregister" class="registerForm">
 
 
 	<div class="registerDiv">

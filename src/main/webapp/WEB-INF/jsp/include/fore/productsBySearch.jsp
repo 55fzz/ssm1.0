@@ -13,7 +13,7 @@
 	<c:forEach items="${ps}" var="p">
 	<div class="productUnit" price="${p.promotePrice}">
 		<a href="foreproduct?pid=${p.id}">
-			<img class="productImage" src="img/productSingle/${p.firstProductImage.id}.jpg">
+			<img class="productImage" src="${pageContext.request.contextPath}/img/productSingle/${p.firstProductImage.id}.jpg">
 		</a>
 		<span class="productPrice">¥<fmt:formatNumber type="number" value="${p.promotePrice}" minFractionDigits="2"/></span>
 		<a class="productLink" href="foreproduct?pid=${p.id}">
@@ -31,8 +31,8 @@
 	</div>
 	</c:forEach>
 	<c:if test="${empty ps}">
-	<div class="noMatch">没有满足条件的产品<div>
-		</c:if>
+		<div class="noMatch">没有满足条件的产品<div>
+	</c:if>
 
 		<div style="clear:both"></div>
 	</div>

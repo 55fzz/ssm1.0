@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProducTimage">
+	<resultMap type="ProducTimage" id="ProducTimageMap">
+		<id property="id" column="ptid"/>
+		<result property="type" column="pttype"/>
+		<association property="product" javaType="Product">
+			<id property="id" column="id"/>
+			<result property="name" column="name"/>
+			<result property="subTitle" column="subTitle"/>
+			<result property="orignalPrice" column="orignalPrice"/>
+			<result property="promotePrice" column="promotePrice"/>
+			<result property="stock" column="stock"/>
+			<result property="createTime" column="createTime"/>
+			<association property="category" javaType="Category">
+				<id property="id" column="cid"/>
+				<result property="name" column="cname"/>
+			</association>
+		</association>
+	</resultMap>
+	
+	<insert id="add" parameterType="ProducTimage" >
+		insert into productimage(pid,type) values (#{product.id},#{type})
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+			select LAST_INSERT_ID() as id
+		</selectKey>
+	</insert>
+	<select id="queryByPidOne" parameterType="int" resultType="ProducTimage">
+		select * from productimage where pid=#{pid} LIMIT 1
+	</select>
+	
+	
+	<select id="querySingleByPid" parameterType="int" resultType="ProducTimage">
+		select * from productimage where pid=#{pid} and type = 'type_single';
+	</select>
+	
+	<select id="queryDetailByPid" parameterType="int" resultType="ProducTimage">
+		select * from productimage where pid=#{pid} and type = 'type_detail';
+	</select>
+</mapper>

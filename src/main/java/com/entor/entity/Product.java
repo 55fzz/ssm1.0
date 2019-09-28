@@ -1,6 +1,7 @@
 package com.entor.entity;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 
 public class Product {
@@ -12,9 +13,47 @@ public class Product {
 	private float promotePrice;
 	private int stock;
 	private Category category;
+	//成交数量
+	private int saleCount;
+	//评论数量
+	private int reviewCount;
 	private Timestamp createTime;
+	private ProducTimage firstProductImage;
+	private List<ProducTimage> productSingleImages;
+	private List<ProducTimage> productDetailImages;
 	
 	
+	
+	public List<ProducTimage> getProductDetailImages() {
+		return productDetailImages;
+	}
+	public void setProductDetailImages(List<ProducTimage> productDetailImages) {
+		this.productDetailImages = productDetailImages;
+	}
+	public List<ProducTimage> getProductSingleImages() {
+		return productSingleImages;
+	}
+	public void setProductSingleImages(List<ProducTimage> productSingleImages) {
+		this.productSingleImages = productSingleImages;
+	}
+	public ProducTimage getFirstProductImage() {
+		return firstProductImage;
+	}
+	public void setFirstProductImage(ProducTimage firstProductImage) {
+		this.firstProductImage = firstProductImage;
+	}
+	public int getSaleCount() {
+		return saleCount;
+	}
+	public void setSaleCount(int saleCount) {
+		this.saleCount = saleCount;
+	}
+	public int getReviewCount() {
+		return reviewCount;
+	}
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
+	}
 	public int getId() {
 		return id;
 	}

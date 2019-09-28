@@ -1,9 +1,20 @@
 package com.entor.entity;
 
+import java.util.List;
+
 public class Category {
 	
 	private int id;
 	private String name;
+	private List<Product> product;
+	
+	
+	public List<Product> getProduct() {
+		return product;
+	}
+	public void setProduct(List<Product> product) {
+		this.product = product;
+	}
 	public int getId() {
 		return id;
 	}

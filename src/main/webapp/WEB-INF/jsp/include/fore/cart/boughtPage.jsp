@@ -134,7 +134,7 @@ $(function(){
 						</td>
 						<td  class="orderItemProductInfoPartTD" width="100px">
 						
-							<div class="orderListItemProductOriginalPrice">￥<fmt:formatNumber type="number" value="${oi.product.originalPrice}" minFractionDigits="2"/></div>
+							<div class="orderListItemProductOriginalPrice">￥<fmt:formatNumber type="number" value="${oi.product.orignalPrice}" minFractionDigits="2"/></div>
 							<div class="orderListItemProductPrice">￥<fmt:formatNumber type="number" value="${oi.product.promotePrice}" minFractionDigits="2"/></div>
 		
 		
@@ -150,7 +150,7 @@ $(function(){
 							</td>
 							<td valign="top" rowspan="${fn:length(o.orderItems)}" class="orderListItemButtonTD orderItemOrderInfoPartTD" width="100px">
 								<c:if test="${o.status=='waitConfirm' }">
-									<a href="foreconfirmPay?oid=${o.id}">
+									<a href="${pageContext.request.contextPath}/foreconfirmPay?oid=${o.id}">
 										<button class="orderListItemConfirm">确认收货</button>
 									</a>
 								</c:if>
@@ -167,7 +167,7 @@ $(function(){
 								</c:if>
 
 								<c:if test="${o.status=='waitReview' }">
-									<a href="forereview?oid=${o.id}">
+									<a href="${pageContext.request.contextPath}/forereview?oid=${o.id}">
 										<button  class="orderListItemReview">评价</button>
 									</a>
 								</c:if>

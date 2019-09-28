@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Orderitem">
+	<resultMap type="Orderitem" id="OrderitemMap">
+		<id property="id" column="oiid"/>
+		<result property="number" column="number"/>
+		<association property="product" javaType="Product">
+			<id property="id" column="id"/>
+			<result property="name" column="name"/>
+			<result property="subTitle" column="subTitle"/>
+			<result property="orignalPrice" column="orignalPrice"/>
+			<result property="promotePrice" column="promotePrice"/>
+			<result property="stock" column="stock"/>
+			<result property="createTime" column="createTime"/>
+		</association>
+		<association property="user" javaType="User">
+			<id property="id" column="uid"/>
+			<result property="name" column="uname"/>
+			<result property="password" column="upassword"/>
+		</association>
+		
+	</resultMap>
+	
+	<select id="queryByOid" resultMap="OrderitemMap" parameterType="int">
+		select oi.id as oiid,oi.number as number,p.*,u.id as uid,u.name as uname,u.password as upassword from orderitem as oi, product as p ,user as u  where oi.pid=p.id and oi.uid=u.id and oi.oid=#{oid}
+	</select>
+	<select id="queryByPage" resultMap="OrderitemMap" parameterType="SP">
+		select oi.id as oiid,oi.number as number,p.*,u.id as uid,u.name as uname,u.password as upassword from orderitem as oi, product as p ,user as u  where oi.pid=p.id and oi.uid=u.id   limit #{start},#{pageSize}
+	</select>
+	<select id="queryByUid" resultMap="OrderitemMap" parameterType="int">
+		select oi.id as oiid,oi.number as number,p.*,u.id as uid,u.name as uname,u.password as upassword from orderitem as oi, product as p ,user as u  where oi.pid=p.id and u.id=#{uid} and oi.uid=#{uid} and oi.oid = 0;
+	</select>
+	
+	<select id="queryByUidAndPid" resultMap="OrderitemMap" parameterType="Orderitem">
+		select oi.id as oiid,oi.number as number,p.*,u.id as uid,u.name as uname,u.password as upassword from orderitem as oi, product as p ,user as u  where oi.pid=p.id and u.id=oi.uid and oi.uid=#{user.id} and oi.pid=#{product.id} and oi.oid = 0;
+	</select>
+	
+	<select id="queryById" resultMap="OrderitemMap" parameterType="int">
+		select oi.id as oiid,oi.number as number,p.*,u.id as uid,u.name as uname,u.password as upassword from orderitem as oi, product as p ,user as u  where oi.pid=p.id and u.id=oi.uid and oi.id=#{id} ;
+	</select>
+	
+	<select id="getSaleCount" parameterType="int" resultType="int">
+		select count(*) from orderitem where pid=#{pid}
+	</select>
+	
+	<select id="getCartTotalItemNumberByUid" parameterType="int" resultType="int">
+		select count(*) from orderitem where oid = 0 and uid=#{uid}
+	</select>
+	
+	<insert id="add" parameterType="Orderitem">
+		insert into orderitem(pid,oid,uid,number) values (#{product.id},0,#{user.id},#{number})
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+			select LAST_INSERT_ID() as id
+		</selectKey>
+	</insert>
+	
+	<update id="update" parameterType="Orderitem">
+		update orderitem <trim prefix="set" suffixOverrides=",">
+			<if test="order.id!=null and order.id!=''">
+				oid =#{order.id},
+			</if>
+			<if test="number!=null and number!=''">
+				number =#{number},
+			</if>
+		</trim>
+		where id=#{id}
+	</update>
+</mapper>

@@ -51,7 +51,7 @@
                     <td><img height="40px" src="${pageContext.request.contextPath}/img/category/${c.id}.jpg"></td>
                     <td>${c.name}</td>
                     <td><a href="${pageContext.request.contextPath}/admin_property_list/${c.id}/1"><span class="glyphicon glyphicon-th-list"></span></a></td>
-                    <td><a href="${pageContext.request.contextPath}/admin_product_list/${c.id}"><span class="glyphicon glyphicon-shopping-cart"></span></a></td>
+                    <td><a href="${pageContext.request.contextPath}/admin_product_list/${c.id}/1"><span class="glyphicon glyphicon-shopping-cart"></span></a></td>
                     <td><a href="${pageContext.request.contextPath}/admin_category_edit/${c.id}"><span class="glyphicon glyphicon-edit"></span></a></td>
                     <td><a deleteLink="true" href="${pageContext.request.contextPath}/admin_category_delete?id=${c.id}"><span class="   glyphicon glyphicon-trash"></span></a></td>
 

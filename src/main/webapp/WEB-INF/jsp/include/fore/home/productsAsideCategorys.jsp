@@ -21,9 +21,9 @@ $(function(){
 <c:forEach items="${cs}" var="c">
 	<div cid="${c.id}" class="productsAsideCategorys">
 	 
-		<c:forEach items="${c.productsByRow}" var="ps">
+		<!--<c:forEach items="${c.product}" var="ps">-->
 			<div class="row show1">
-				<c:forEach items="${ps}" var="p">
+				<c:forEach items="${c.product}" var="p">
 					<c:if test="${!empty p.subTitle}">
 						<a href="foreproduct?pid=${p.id}">
 							<c:forEach items="${fn:split(p.subTitle, ' ')}" var="title" varStatus="st">
@@ -36,7 +36,7 @@ $(function(){
 				</c:forEach>
 				<div class="seperator"></div>
 			</div>		
-		</c:forEach>
+		<!--</c:forEach>-->
 	</div>			
 </c:forEach>
 	

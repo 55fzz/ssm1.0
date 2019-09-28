@@ -25,9 +25,9 @@ public class BaseServiceImpl<T> implements BaseService<T>{
 	}
 
 	@Override
-	public List<T> queryByPage(Class<?> cls, SP sp) {
+	public List<T> queryByPage(Class<?> cls, SP s) {
 		// TODO Auto-generated method stub
-		return baseDao.queryByPage(cls, sp);
+		return baseDao.queryByPage(cls, s);
 	}
 
 	@Override
@@ -52,6 +52,12 @@ public class BaseServiceImpl<T> implements BaseService<T>{
 	public int getTotals(Class<?> cls) {
 		// TODO Auto-generated method stub
 		return baseDao.getTotals(cls);
+	}
+
+	@Override
+	public List<T> queryAll(Class<?> cls) {
+		// TODO Auto-generated method stub
+		return baseDao.queryAll(cls);
 	}
 
 }

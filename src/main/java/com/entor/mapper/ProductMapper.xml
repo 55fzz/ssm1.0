@@ -18,5 +18,65 @@
 	</resultMap>
 	
 	
+	<select id="queryByPage" parameterType="Map" resultMap="ProductMap">
+		SELECT p.*,c.id as cid,c.name as cname  FROM product p,category c where p.cid=c.id and p.cid=#{cid} limit #{sp.start},#{sp.pageSize}
+	</select>
+	
+	<select id="queryByKeyword" parameterType="Map"  resultMap="ProductMap">
+		SELECT p.*,c.id as cid,c.name as cname  FROM product p,category c where p.cid=c.id and p.name like '%${keyword}%' 
+	</select>
+	
+	<select id="getCidById" parameterType="int" resultType="int">
+		select cid from product where id = #{id}
+	</select>
+	
+	<select id="getTotals" parameterType="int" resultType="int">
+		select count(*) from product where cid=#{cid}
+	</select>
+	
+	<select id="getTotalsByKeyword" parameterType="String" resultType="int">
+		select count(*) from product where p.name like '%${keyword}%'
+	</select>
+	
+	<select id="queryById" parameterType="int" resultMap="ProductMap">
+		SELECT p.*,c.id as cid,c.name as cname  FROM product p,category c where p.cid=c.id and p.id=#{id}
+	</select>
+	
+	<select id="queryByCid" parameterType="int" resultMap="ProductMap">
+		SELECT *  FROM product where cid=#{cid}
+	</select>
+	
+	<insert id="add" parameterType="Product">
+		insert into product(name,subTitle,orignalPrice,promotePrice,stock,cid,createDate) values (#{name},#{subTitle},#{orignalPrice},#{promotePrice},#{stock},#{category.id},now())
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+			select LAST_INSERT_ID() as id
+		</selectKey>
+	</insert>
 
+
+	<update id="update" parameterType="Product">
+		update product 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="name!=null and name!=''">
+				name = #{name},
+			</if>
+			<if test="subTitle!=null and subTitle!=''">
+				subTitle = #{subTitle},
+			</if>
+			<if test="orignalPrice!=null and orignalPrice!=''">
+				orignalPrice = #{orignalPrice},
+			</if>
+			<if test="promotePrice!=null and promotePrice!=''">
+				promotePrice = #{promotePrice},
+			</if>
+			<if test="stock!=null and stock!=''">
+				stock = #{stock},
+			</if>
+		</trim>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from product where id=#{id}
+	</delete>
 </mapper>

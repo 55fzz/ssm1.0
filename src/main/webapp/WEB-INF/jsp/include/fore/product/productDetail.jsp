@@ -20,7 +20,7 @@
 		
 		<div class="productParamterList">
 			<c:forEach items="${pvs}" var="pv">
-				<span>${pv.property.name}:  ${fn:substring(pv.value, 0, 10)} </span>
+				<span>${pv.property.name}:${fn:substring(pv.value, 0, 10)} </span>
 			</c:forEach>
 		</div>
 		<div style="clear:both"></div>
@@ -28,8 +28,10 @@
 	
 	<div class="productDetailImagesPart">
 		<c:forEach items="${p.productDetailImages}" var="pi">
-			<img src="img/productDetail/${pi.id}.jpg">
+			<img src="${pageContext.request.contextPath}/img/productDetail/${pi.id}.jpg">
 		</c:forEach>
 	</div>
+	
+</div>
 </div>
 

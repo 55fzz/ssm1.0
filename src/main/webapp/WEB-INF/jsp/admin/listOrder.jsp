@@ -47,7 +47,26 @@
 			<c:forEach items="${os}" var="o">
 				<tr>
 					<td>${o.id}</td>
-					<td>${o.statusDesc}</td>
+					<td>
+						<c:if test="${o.status=='finish'}">
+							<p>完成订单</p>
+						</c:if>
+						<c:if test="${o.status=='waitReview'}">
+							<p>完成订单</p>
+						</c:if>
+						<c:if test="${o.status=='notPay'}">
+							<p>订单未支付</p>
+						</c:if>
+						<c:if test="${o.status=='waitDelivery'}">
+							<p>未发货</p>
+						</c:if>
+						<c:if test="${o.status=='waitConfirm'}">
+							<p>未收货</p>
+						</c:if>
+						<c:if test="${o.status=='delete'}">
+							<p>取消订单</p>
+						</c:if>
+					</td>
 					<td>￥<fmt:formatNumber type="number" value="${o.total}" minFractionDigits="2"/></td>
 					<td align="center">${o.totalNumber}</td>
 					<td align="center">${o.user.name}</td>
@@ -58,10 +77,10 @@
 					<td><fmt:formatDate value="${o.confirmDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 
 					<td>
-						<button oid=${o.id} class="orderPageCheckOrderItems btn btn-primary btn-xs">查看详情</button>
+						<button oid="${o.id}" class="orderPageCheckOrderItems btn btn-primary btn-xs">查看详情</button>
 
 						<c:if test="${o.status=='waitDelivery'}">
-							<a href="admin_order_delivery?id=${o.id}">
+							<a href="${pageContext.request.contextPath}/admin_order_delivery/${o.id}">
 								<button class="btn btn-primary btn-xs">发货</button>
 							</a>
 						</c:if>
@@ -75,11 +94,11 @@
 								<c:forEach items="${o.orderItems}" var="oi">
 									<tr>
 										<td align="left">
-											<img width="40px" height="40px" src="img/productSingle/${oi.product.firstProductImage.id}.jpg">
+											<img width="40px" height="40px" src="${pageContext.request.contextPath}/img/productSingle/${oi.product.firstProductImage.id}.jpg">
 										</td>
 
 										<td>
-											<a href="foreproduct?pid=${oi.product.id}">
+											<a href="${pageContext.request.contextPath}/foreproduct?pid=${oi.product.id}">
 												<span>${oi.product.name}</span>
 											</a>
 										</td>

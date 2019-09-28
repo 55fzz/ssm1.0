@@ -31,9 +31,9 @@ public class BaseDaoImpl<T> extends SqlSessionDaoSupport implements BaseDao<T>{
 	}
 
 	@Override
-	public List<T> queryByPage(Class<?> cls, SP sp) {
+	public List<T> queryByPage(Class<?> cls, SP s) {
 		// TODO Auto-generated method stub
-		return getSqlSession().selectList(cls.getSimpleName()+".queryByPage", sp);
+		return getSqlSession().selectList(cls.getSimpleName()+".queryByPage", s);
 	}
 
 	@Override
@@ -58,6 +58,13 @@ public class BaseDaoImpl<T> extends SqlSessionDaoSupport implements BaseDao<T>{
 	public int getTotals(Class<?> cls) {
 		// TODO Auto-generated method stub
 		return getSqlSession().selectOne(cls.getSimpleName()+".getTotals");
+	}
+
+
+	@Override
+	public List<T> queryAll(Class<?> cls) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList(cls.getSimpleName()+".queryAll");
 	}
 
 }

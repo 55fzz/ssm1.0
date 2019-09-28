@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Order">
+
+	<resultMap id="OrderMap" type="Order">
+        <id column="id" property="id"/>
+        <result column="orderCode" property="orderCode"/>
+        <result column="address" property="address"/>
+        <result column="post" property="post"/>
+        <result column="receiver" property="receiver"/>
+        <result column="mobile" property="mobile"/>
+        <result column="userMessage" property="userMessage"/>
+        <result column="createDate" property="createDate"/>
+        <result column="payDate" property="payDate"/>
+        <result column="deliveryDate" property="deliveryDate"/>
+        <result column="confirmDate" property="confirmDate"/>
+        <result column="status" property="status"/>
+        <association property="user" javaType="User">
+        	<id property="id" column="uid"></id>
+        	<result property="name" column="name"/>
+        	<result property="password" column="password"/>
+        </association>
+    </resultMap>
+	<insert id="add" parameterType="Order" >
+		insert into order_(orderCode,address,post,receiver,mobile,userMessage,createDate,uid,status) values(#{orderCode},#{address},#{post},#{receiver},#{mobile},#{userMessage},now(),#{user.id},#{status})
+		<selectKey keyProperty="id" resultType="int" order="AFTER">
+			select LAST_INSERT_ID() as id
+		</selectKey>
+	</insert>
+	<select id="queryByPage" parameterType="SP" resultMap="OrderMap" >
+		select o.* ,u.id as uid,u.name as name,u.password as password from order_ as o ,user u where o.uid=u.id  limit #{start},#{pageSize}
+	</select>
+	
+	<select id="queryById" resultMap="OrderMap">
+		select o.* ,u.id as uid,u.name as name,u.password as password from order_ as o ,user u where o.uid=u.id and o.id=#{id}
+	</select>
+	
+	<select id="queryByUid" resultMap="OrderMap">
+		select o.* ,u.id as uid,u.name as name,u.password as password from order_ as o ,user u where o.uid=u.id and o.uid=#{uid}
+	</select>
+	
+	<update id="update" parameterType="Order">
+		update order_ 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="orderCode!=null and orderCode!=''">
+				orderCode =#{orderCode},
+			</if>
+			<if test="payDate !=null and payDate!='' ">
+				payDate =#{payDate},
+			</if>
+			<if test="deliveryDate!=null and deliveryDate!=''">
+				deliveryDate =#{deliveryDate},
+			</if>
+			<if test="confirmDate!=null and confirmDate!=''">
+				confirmDate =#{confirmDate},
+			</if>
+			<if test="status!=null and status!=''">
+				status =#{status},
+			</if>
+		</trim>
+		where id = #{id}
+	</update>
+	
+	<select id="getTotals" resultType="int">
+		select count(*) from order_
+	</select>
+</mapper>

@@ -10,7 +10,7 @@ public interface BaseService<T> {
 	
 	public T queryById(Class<?> cls,Serializable id);
 	
-	public List<T> queryByPage(Class<?> cls,SP sp);
+	public List<T> queryByPage(Class<?> cls,SP s);
 	
 	public void add(T t);
 	
@@ -19,4 +19,6 @@ public interface BaseService<T> {
 	public void update(T t);
 	
 	public int getTotals(Class<?> cls);
+	
+	public List<T> queryAll(Class<?> cls);
 }

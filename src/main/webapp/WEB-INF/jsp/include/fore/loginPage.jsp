@@ -9,7 +9,7 @@
 <script>
     $(function(){
 
-        <c:if test="${!empty msg}">
+    	<c:if test="${!empty msg}">
         $("span.errorMessage").html("${msg}");
         $("div.loginErrorMessageDiv").show();
         </c:if>
@@ -38,7 +38,7 @@
 <div id="loginDiv" style="position: relative">
 
 	<div class="simpleLogo">
-		<a href="${contextPath}"><img src="img/site/simpleLogo.png"></a>
+		<a href="${pageContext.request.contextPath}/home"><img src="img/site/simpleLogo.png"></a>
 	</div>
 
 

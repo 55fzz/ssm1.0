@@ -17,8 +17,7 @@
 </c:if>
 	
 <div class="categoryProducts">
-	<c:forEach items="${c.products}" var="p" varStatus="stc">
-		<c:if test="${stc.count<=categorycount}">
+	<c:forEach items="${c.product}" var="p" >
 		<div class="productUnit" price="${p.promotePrice}">
 			<div class="productUnitFrame">
 				<a href="foreproduct?pid=${p.id}">
@@ -43,7 +42,6 @@
 				</div>
 			</div>
 		</div>
-		</c:if>
 	</c:forEach>
 		<div style="clear:both"></div>
 </div>

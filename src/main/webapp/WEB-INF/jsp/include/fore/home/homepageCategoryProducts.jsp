@@ -24,10 +24,10 @@
 				<div class="left-mark"></div>
 				<span class="categoryTitle">${c.name}</span>
 				<br>
-				<c:forEach items="${c.products}" var="p" varStatus="st">
+				<c:forEach items="${c.product}" var="p" varStatus="st">
 					<c:if test="${st.count<=5}">
 						<div class="productItem" >
-							<a href="foreproduct?pid=${p.id}"><img width="100px" src="img/productSingle_middle/${p.firstProductImage.id}.jpg"></a>
+							<a href="foreproduct?pid=${p.id}"><img width="100px" src="${pageContext.request.contextPath}/img/productSingle_middle/${p.firstProductImage.id}.jpg"></a>
 							<a class="productItemDescLink" href="foreproduct?pid=${p.id}">
 								<span class="productItemDesc">[热销]
 								${fn:substring(p.name, 0, 20)}

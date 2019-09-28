@@ -74,16 +74,16 @@
 			<tbody class="productListTableTbody">
 				<c:forEach items="${ois}" var="oi" varStatus="st" >
 					<tr class="orderItemTR">
-						<td class="orderItemFirstTD"><img class="orderItemImg" src="img/productSingle_middle/${oi.product.firstProductImage.id}.jpg"></td>
+						<td class="orderItemFirstTD"><img class="orderItemImg" src="${pageContext.request.contextPath}/img/productSingle_middle/${oi.product.firstProductImage.id}.jpg"></td>
 						<td class="orderItemProductInfo">
-						<a  href="foreproduct?pid=${oi.product.id}" class="orderItemProductLink">
+						<a  href="${pageContext.request.contextPath}/foreproduct?pid=${oi.product.id}" class="orderItemProductLink">
 							${oi.product.name}
 						</a>
 						
 						
-							<img src="img/site/creditcard.png" title="支持信用卡支付">
-							<img src="img/site/7day.png" title="消费者保障服务,承诺7天退货">
-							<img src="img/site/promise.png" title="消费者保障服务,承诺如实描述">
+							<img src="${pageContext.request.contextPath}/img/site/creditcard.png" title="支持信用卡支付">
+							<img src="${pageContext.request.contextPath}/img/site/7day.png" title="消费者保障服务,承诺7天退货">
+							<img src="${pageContext.request.contextPath}/img/site/promise.png" title="消费者保障服务,承诺如实描述">
 						
 						</td>
 						<td>
@@ -142,6 +142,7 @@
 		<div class="pull-right"> 
 			<span>实付款：</span>
 			<span class="orderItemTotalSumSpan">￥<fmt:formatNumber type="number" value="${total}" minFractionDigits="2"/></span>
+			<input type="hidden" name="total" value="${total}">
 		</div>
 	</div>
 	
